@@ -1,0 +1,173 @@
+100% interview question
+		Booting procedure
+
+	2day 3 to 4 questions in this
+
+RHEL 4,5,6
+	1. BIOS (BASIC INPUT/OUTPUT system)
+	2. MBR (Master boot recorder)
+	3. GRUB (Grand unified boot loader)
+	4. Kernel 
+	5. Init (initilizing particular runlevel)
+	6. Runlevel 
+RHEL 7 & 8
+	1. BIOS
+	2. MBR
+	3. GRUB
+	4. Kernel
+	5. Systemd
+
+  BIOS :
+	sub task 1: post(power on self test)
+			post is a program which integrated in one of chip. it does health checkup of all the
+			components which are connected to the mother board.
+	sub task 2: cmos(complementory metal oxide semiconductor)
+			cmos will capture and store the critical information before server goes down.
+			the same information will be pass back to main memory while server coming up.
+			critical informaiton : date and time, ram,processor info, startup program.
+			
+	sub task 3: find OS in devices and pass control to next stage
+			ROM or bios
+			read only memory
+			ram random access memory
+			
+			dvd
+			USB
+			disk
+			floppy
+		as soon as bios finds the operating system in any of the componenent then bios pass control to 				MBR.
+
+if not found operating system in any of the device then stages will not move further. it stops at BIOS stage.
+		error : OS not found
+
+	Stage 2 : MBR (Master boot recorder)
+		
+	MBR is a very small program, it stores in first sector of the operating system device.
+	1 sec = 512 bytes
+	446 bytes = primary boot loader information is nothing but next stage information. what is the next stage information that is grub.
+	64 bytes = partition table information
+	2  bytes = validator program.
+if grub is in good condition then pass control to grub stage
+if grub is not in good condition then mbr gives error like grub error.
+
+stage 3: Grub (grand unfied boot loader) 
+	RHEL 5,6  Grub
+	RHEL 7,8  grub2
+
+	grub is a just boot loader to boot default kernel or end user will have choice to boot required kernel.
+	grub is a mediator to choose which kenel has to bootup at this time.
+
+	if not select by default it boots with default kernel which we specified
+	5 kernels
+	end user can choose which kernel has to boot up. end user will have option to select kernel to boot up.
+
+	rhel
+	solari
+	suse
+	window
+		7.0 3
+		yum update
+		7.5 2
+		SuSE default
+		grub2-set-default 3
+		to boot with 7.0 operating system.
+stage 4: kenel
+	task1 : Load the drivers and modules
+*		/boot/initramfs  .   it's a temp / file system. It contains configuration files to load drivers. it's equal to /.
+
+		/boot/initrd
+
+	task2 : Mount the / file system in read only mode
+* in kernel stage / will be in which mode?
+	read only th mode. 
+*	if / is in read only mode then how next /sbin/init or /usr/lib/systemd/systemd programs will execute.
+	read and execution is enough to execute pogram. write permissions doen't required to execute the program.
+	task3 : trigger the following program /sbin/init(rhel5,6) /usr/lib/systemd/systemd(rhel7 & 8).
+		/sbin/init rhel5 & 6. 
+		/usr/lib/systemd/systemd rhel 7 & 8.
+* the feature of systemd is it can load the startup programs parlely.
+	pgr1 pgr2 pgr3
+	
+/sbin/init the startup programs will load in sequence order. one by one .
+
+adv : reduced bootup time.
+
+* what is the process id of /sbin/init or /usr/lib/systemd/systemd?
+	1 is the process id of /sbin/init 
+	1 is the process id of /usr/lib/systemd/systemd
+* what is the first process of your operating system?
+	/sbin/init if os is rhel 5 & 6
+	/usr/lib/systemd/systemd if os is rhel 7 & 8.
+
+ps -ef | grep systemd
+
+
+
+		systemd
+
+rhel 6 : init
+	how many runlevels are in rhel 6 ?
+	7 run leves
+	
+     run level 0 shutdown
+     run level 1 single user mode
+     run level 2 command mode without nfs
+     run level 3 command mode with nfs
+     run level 4 R & D 
+     run level 5 GUI( graphical user interface)
+     run level 6 reboot
+
+	init 6 reboot
+	init 0 power off
+	init 1 initilizing runlevel 1. switching one runlevel to other runlevel.
+
+
+how many runlevels are in rhel 7 ?
+  from rhel 7 onwards they introduced targets. instead of runlevels they given targets.
+	target 1:poweroff.target
+	target 2:rescue.target ( single user mode) it's for repair os related things.
+	target 3:multi-user.target (runlevel 3)
+	target 4: graphical.target( runlevel 5)
+	target 5: reboot.target (runlevel 6)
+
+
+stage 5: init (/etc/inittab) in line 26 here we will specify default runlevel.
+	
+	how to get present loaded runlevel
+	rhel 6 : runlevel
+		 who -r
+	rhel 7 : systemctl get-default
+		 runlevel
+		 who -r
+	/etc/inittab 26 line rhel 7 /etc/systemd/system/default.target
+
+
+stage 6 : runlevels/ targets
+	
+	rc : run controller
+	rc 0: runlevel 0
+	rc0.d
+	rc1.d
+	rc2.d
+	rc3.d
+	rc4.d
+	rc5.d
+	rc6.d
+	s startup program
+	k kill program
+	s80
+	80 starting sequence number while booting up.
+
+
+rhel 7 :  systemctl enable vsftpd   ==> vsftpd service should start in next boot
+rhel 6 :  chkconfig vsftpd on
+	  chkconfig --levle 35 vsftpd off
+
+	  systemctl is-enabled vsftpd   ==> to get vsftpd service status in next boot
+	  systemctl disable vsftpd      ==> disable vsftpd service in next boot. 
+
+	imediately stop/start services
+		systemctl start vsftpd   service vsftpd start
+		systemctl stop vsftpd    service vsftpd stop
+		systemctl restart vsftpd service vsftpd restart
+		systemctl reload vsftpd  service vsftpd reload
