@@ -1,0 +1,673 @@
+Hardware requirement for RHEL 7
+
+RAM = 2 GB
+Disk = 6 GB
+processor = any
+
+
+
+      			/
+
+/ is a parent directory
+ inside this parent directory we will have 13 default important directories.
+
+   1. /boot
+   2. /root
+   3. /home
+   4. /etc
+   5. /var
+   6. /usr
+   7. /sbin(/usr/sbin)
+   8. /bin(/usr/bin)
+   9. /lib
+   10. /proc
+   11. /dev
+   12. /mnt
+   13. /tmp
+
+
+1. /boot : contains the OS bootable files, these files helps to load your operating system.(eg: kernel files).
+
+
+ clear = to clear the screen (ctl+l)
+
+alt+F2
+
+2. /root : it's a home directory of administrator.who is the administrator in Linux/Unix root user.
+        no other user can enter into root user home directory.
+       
+   window: c:/users/admin
+			Desktop,Downloads, Documents.....
+
+	   c:/users/prasad
+			Desktop,Downloads,Documents......
+3. /home  :  contains other users home directories. this is the default location for other users.
+
+4. /etc  : it contains configuration files of operating system and third party tools/softwares configuration files.
+5. /var  :  it contains activity report or log(activity report) of system activities.
+   /var/log i deleted everything from /var/log . is operating sytem will come up? yes
+     unfortunatly deleted /boot directory data. is operating system will cme up? no
+6. /usr;  Unix system resources
+      it contains oprerating system binaries(programs) like commands(ls,cd,cp,rm,useradd,userdel)
+
+  ls  command
+  cd  command
+  pwd command
+  rm   command
+                 /usr/bin ( common commands for all users commands)
+                 /usr/sbin (super(root) user commands)
+
+		useraddministration commands : sbin
+    		 useradd,userdel,usermod
+
+		software managment:   sbin
+		install,uninstall,upgrade
+
+		ls,cd,pwd    =  bin
+
+
+
+7.  /bin  : few commands are seperated from /usr/bin to /bin location. these commands will help during OS boot up.
+8.  /sbin : few commands are seperated from /usr/sbin to /sbin directory or location. these commands will help during os boot up.
+9.  /lib  : it contains libraries of operating system. these libraries(programs) are shared between multiple commands or binraries.
+   libraries are important to run your programs or operating system.
+     /boot = important to load operating system
+     /lib  = imp to load operating system
+10. /proc  :  it a temp directory for processor. this directory used by processor(cpu). it stores data of process or task.
+11. /dev  :  It contains logical device names( cd/DVD, hard disk, RAM,).
+12. /mnt   : guest directory . we can store any data here
+13. /tmp  : it contains every user running processes data. 
+
+
+
+                         File Management
+			=================
+			
+	1. Cat (Concatenate)
+	2. VI  (Virtual interface)
+	3. Touch
+
+windows: Notepad and ms word
+
+  files will be in black colour
+  directories will be in blue
+
+      cat > filename
+	ctrl + d
+==> to view the file content
+	
+cat filename 
+==> to view the file content with line numbers
+	cat -n filename
+
+
+==> how to append content to existing file
+	cat >> batch22
+
+the limitation in cat is we can't modify existing data.
+> create and overwrite  if file is not exists then it creates. If file is exists then it overwrites.
+>> append
+
+VI virtual interface
+
+1. Command mode(default mode)
+2. Insert mode
+3. Replacement mode
+
+
+dd : to delete the cursor standing line
+5dd : to delete 5 lines from the cursor standing line
+1000dd
+u  : to undo the latest changes
+yy : to copy the cursor standing line . this is for copy only one line
+5yy: to copy 5 lines from the cursor standing line. 
+p  : to past copied data below cursor postion. small p
+shift + p : to past copied data above of cursor postion. capital P.
+cc : to cut the cursor postion line
+10cc : to cut 10 from the cursor position line.
+
+how to switch from command mode to insert mode ==> i
+how to switch back to command mode ==> esc we have presess esc key to come back command mode
+
+:se nu : to set the line numbers for the file content
+:se nonu : to unapear/hide line numbers for the file content.
+gg   : to take cursor to file line of the file.
+Shift + g : to take cursor to last line of the file. shift + g is nothing capital G
+:25 : to take cursor to particular line of file
+:15
+
+i : to switch into the insert mode at the same position of cursor.
+a : switch into the insert mode but next position of cursor standing.
+o : create new below of cursor position line and switch to insert mode.
+shift + O : create new line above of cursor position line and switch into insert mode.
+
+:w : save the changes
+:q : quit from the file without save changes
+:wq : is for save changes and quit from the file.
+$   : to take cursor to end of the line
+0(zero)  : to take cursor to starting of the line
+   
+Shift + i I    : Take cursor to starting of the line and switch into insert mode
+shift + a A    : Take cursor to end of the line and swith into insert mode
+i 
+a
+
+Search options
+/word
+?word
+/prasad   : search string from cursor position to down 
+		n is for seach string next location or position.
+		N is go back to previous search
+
+?prasad   : search string froom cursor position to up
+		n is for go back to previous search place
+		N is for search string in the next position
+
+Replace:
+:%s/prasad/prasad babu/g
+:%s/existingword/newword/g
+
+
+x   : is for delete single char from cursor position
+dw  : is for delete one word from the cursor position
+
+r  : is for replace one char from the cursor position.
+Shift + r R  : is for switch from command mode to replacement mode
+esc  is for come back to command mode
+
+< h : is for move cursor to left from cursor standing position.
+> l : is for move cursor to right from cursor standing poistion.
+ k : is for move cursor to up
+ j : is for move cursor to down
+    
+
+   Touch:
+
+it is for update curent date and time of existing file
+ touch is for create empty files this is wrong. the actual functionality is change current timestamp to the existing file.
+
+touch file2 file3 file4 file5 file6 file7
+if file is not exist then touch creates empty file. if file is exist then just update curent date & time to file.
+
+
+how to create 100 file with same format
+
+touch file{1..100}
+
+
+How to create folder/directory
+mkdir testdir
+mkdir <directory nams
+
+   mkdir b22dir
+   mkdir -p /b22dir1/testbarnch/chennai
+
+
+how to know the presently logged in user?
+whoami
+how to switch from one user to another user?
+  su - prasad
+switch user
+
+how we can logout from user?
+   logout
+   exit
+   ctrl + d
+
+how to copy file or directory from one directory to another directory?
+	cp <source file name> <destination path>
+
+       cp /batch22  /var/
+
+
+
+. current path
+.. previous path
+../.. back to 2 previous paths
+../../../ back to 3 previous paths
+
+
+cd /p/r/a/s/a/d
+cd ..
+pwd
+/p/r/a/s/a
+
+  
+
+     cd -
+is for take cursor to previous or old path
+
+cd 
+
+current pwd will change to user home directory. It takes to user home directory.
+
+cd / to take user to / path
+cd /etc to take user to /etc
+but just cd will take user to his home directory.
+cd 
+
+what is the root user home directory?
+/root
+
+what is the prasad user home directory?
+/home/prasad
+
+    remove
+     rm <filename>
+     rm -r <directory name>
+  -r recursively
+  -f forcefully delete file or directory without user confirmation
+
+
+        Move/rename
+      mv filename /etc/
+
+
+how to know the operating system version?
+  cat /etc/os-release
+RHEL = red hat enterprise Linux  7.5
+  4,4.1,4.2,
+  major version is 4,5,6,7,8
+  minor versions = 4.1,4.2,4.10; 5.1,5.2,5.3,5.10;  6.1,6.2,6.3,6.10; 7,7.1,7.2,7.3, 7.10; 8
+
+
+how to know the operating system architecture is 64 bit or 32 bit.
+note: till RHEL 6 they used release both 32 and 64 but from RHEL 7 onwards started releasing only 64 bit.
+
+    uname -m
+    arch
+    hostnamectl status
+
+how to print hostname of machine?
+     uname -n
+     hostname
+
+how to change the hostname?
+    hostnamectl set-hostname newname
+
+system configuration:
+RAM
+processors
+HDD
+ethernet card(network)
+   
+ how to get installed memory(RAM) of server?
+	free -m or free -g 
+	cat /proc/meminfo
+
+	m : size is going show in mega bytes
+	g : size is going show in giga bytes
+	k : kilo
+
+  1024 kb is 1 MB
+  1024 MB is 1 GB
+
+
+free -m
+1023 0
+
+
+
+How to get the processor(CPU) information? how many processors and capacity of processor?
+   lscpu
+list cpu info
+   cat /proc/cpuinfo
+
+How to get disks information?
+  lsblk
+  fdisk -l
+  lsscsi
+
+
+how to get network cards information?
+
+   ip a
+   ifconfig -a
+
+
+how to know platform?
+  dmidecode -s system-product-name
+  hostnamectl status
+how to know the serial number of machine?
+   dmidecode -s system-serial-number
+   
+  how to know the date and time of system?
+	date
+
+
+power off commands: h means halt
+  shutdown -h now
+  shutdown -h 5 
+  shutdown -h 5 " message" 
+  shutdown -h 5 "we are going to power off this server as per maintenance . Please close your things before shutdown"
+  poweroff
+  halt
+  init 0
+
+reboot the server: r means reboot
+  shutdown -r now
+  shutdown -r 5 
+  shutdown -r 5 " message" 
+  shutdown -r 5 " we are going to rebooting this server as per maintenance . Please close your things before shutdown" 
+  reboot
+  init 6
+
+  cp /file1 /tmp/
+  cp -r /testdir /tmp/
+
+
+head and tail commands
+head command is for print starting 10 lines of the file
+head <filename>
+head -20 <filename> 
+head -50 <filename>
+
+tail command is for print last 10 lines of the file
+tail <filename>
+tail -5 <filename>
+tail -100 <filename>
+
+head filename | cat -n
+
+| it can store the previous command output and pass it to next command as a input
+
+cmd1 | cmd2 | cmd3 | cmd4 
+
+               wc(word count)
+   
+
+		wc -w filename
+		wc -l filename
+		wc -c filename
+
+   -w count the words in file
+   -l count the line numbers from the file
+   -c count the char in the file
+
+
+   more old method
+  less advanced . It a copy of vi command.
+  are for read file content page by page
+
+cat /batch22
+  more /var/log/messages
+  more /batch22
+  less /batch22
+
+space key for move on to next page
+b is for back to the previous page
+enter key is for move cursor line by line
+above three options will work in both less and more.
+
+q = quit from the more or less command
+
+in less command to move cursor arrow keys will work but in more command arrow keys will not work 
+
+h = is for to get the help on options
+
+ls -l | more
+read the ls -l output page by page.
+
+    ls options
+ls -l : print the data in long list
+
+
+-rw-r--r-- 2   root  root  4096  10 aug  batch22
+drwxr-xr-x 2   root  root  4096   22 june test
+lrwxrwxrwx 2   root  root  12486  2019 june 20 bin
+
+
+
+field 1 : file type
+  - = regular file
+  d = directory
+  l = linked file or shortcut file from different place
+  b = block device files which can understand end user
+  c = chart device files which can understand OS
+  p = Pip (OS purpose)
+  S = Socket( OS purpose)
+
+Field 2: Permissions
+field 3: Hard link counts  
+field 4 : owner
+field 5 : group
+field 6 : size in bytes
+field 7 : creation/modify date and time of the file/directory
+field 8 : name of file/directory
+
+
+
+
+  ls -lt sort output with date and time
+
+latest will go up
+old will show down
+  ls -ltr 
+ -l long list
+ -t sort out output with date and time
+ -r reverse the output
+
+
+
+
+ls -a prints normal and hidden files/directories
+
+
+     touch .file1
+     mkdir .testdir
+    
+
+vi .tfile22
+
+  date +"%F"
+
+how to set or adjust the date and time?
+  date -s "10 aug 2020 07:20:35 AM"
+how to change the timezone?
+
+step 1 : remove softlink of existing zone file from /etc
+    rm -rf /etc/localtime
+step 2 : create link of timezone file
+	ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+
+     GREP
+    -----
+
+grep is for search string/word from file or files in one depth of directory.
+
+to search file or directory is exist or not there we will use find command not grep.
+
+1. Grep : To search string in file
+2. find : to search file or directory in system.
+
+
+      grep <word> file name
+      grep <word> *
+      grep -w prasad batch22
+      grep -wc prasad batch22
+ 	grep -wn prasad batch22
+	grep -l prasad *
+	grep -A 5 prasad /logfile
+
+
+
+w = word search
+c = count how many times it exist file
+n = print the line numbers where and all finds the word
+l = list out the filename where and all string exists. it can look only one depth of directory
+A = print 5 lines after string found
+B = print 5 lines before string found
+
+how to search multiple strings
+   grep -w "word1\|word2\|word3\|word4" /filename
+
+
+ 
+
+Linux: Redhat(RHEL),CENTOS,Fedora,SuSE,ubuntu,pupy linux,kaly linux
+
+OS = is nothing collection programs, with help of these programs only we are able to intaract with hardware.
+os is nothing interpreter between end user and hardware.
+
+Unix OS released in 1969. It's purly C based operating system. operating system developed in C language.
+ 
+
+unix is a open source operating system.
+
+code is open to modify 
+
+linux is purly open sorce operating system.
+
+  RHEL (red hat enterprise linux)
+  RHEL 4, 5, 6, 7, 8
+
+ 60-70 machines are running with RHEL 7
+  25 %  machines are running with RHEL 6
+   5 %  machines  are running with RHEL 8
+
+ 
+ RHEL 7 is the major version
+   7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 7.10
+
+
+major 7
+minor 7.1,7.2.....
+
+
+          root is the default administrator in Linux servers
+
+    /
+
+
+        pwd : print working directory
+
+        cd /   : change directory
+ 	ls  : list out the current folder data.
+
+
+
+
+		Disk Management
+
+
+		Disk Architecture
+
+	Disk management methods
+	1. Basic Method
+	2. LVM Method (Logical Volume management)
+	3. Raid(MDADM)
+
+ 
+01011001 = 8 Bits
+
+8 Bits  	= 1 Byte
+1024 Bytes 	= 1 KB (Kilobyte)
+1024 KB		= 1 MB (Megabyte)
+1024 MB		= 1 GB (gigabyte)
+1024 GB		= 1 TB(Terabyte)
+1024 TB		= 1 PB(Petabyte)
+1024 PB		= 1 EB(Exa byte)
+
+1 sector = 512 bytes
+2 sectors = 1 KB
+
+ HDD(IDE method) = Integrated Device electronics (16 partitions) /dev/hda
+
+ scsi = small computer system interface (64 Partitions)   /dev/sda  
+		scsi disk or sata disk
+
+		/dev/sda
+			a is first disk
+			b is second disk
+		/dev/sdb
+		/dev/sdc
+		/dev/sdd1 (1 partition)
+		/dev/sdd2 (2nd partition)
+		/dev/sdd3 (3rd partition)
+		/dev/sdd4 (4th partition)
+
+                /dev/sdd64
+
+
+      
+  	there are 2 types of partitions
+	1. Primary partition 
+	2. Logical partition
+
+primary supports to store bootable files.Like opearting system realated files
+logical is for store general data.
+*  in each scsi disk we can create max 4 primary partitions.
+	/boot is a primary partition
+	/, /var and any other partitions are logical partitions
+
+how to scan for new disk
+  echo " - - - " >> /sys/class/scsi_host/host0/scan
+  echo " - - - " >> /sys/class/scsi_host/host1/scan
+  echo " - - - " >> /sys/class/scsi_host/host2/scan
+
+Create partition using normal method.
+step 1: Create the partition ( enter inside disk and create partition) fdisk /dev/sdb  n ==> p ==> partition number 1 ==> starting sector default just enter ==> ending sectory +2G and enter
+	p : print the partition table information
+	n : create new partition
+	d : delete partition
+	m : help
+	t : change partition system id ( 83 linux, 82 swap , 8e lvm)
+
+
+			/dev/sdb
+			/dv/sdb1    p
+			/dev/sdb2   extended
+			/dev/sdb3   logical
+			/dev/sdb4   logical
+			/dev/sdb5   logical
+
+step 2:  update disk changes to kernel using partprobe command : partprobe /dev/sdb
+step 3:  keep partition in any of the file system type (ext2,ext3,ext4,xfs)   mkfs.xfs /dev/sdb1
+										mkfs.ext4 /dev/sdb2
+		ext2 : RHEL 4
+		ext3 : RHEL 5
+		ext4 : RHEL 6
+		xfs  : RHEL 7 & 8
+
+* explain difference between ext4 and xfs 
+* what is journaling?
+	journaling is nothing but data about data is nothing but meta data. 
+
+		journaling will mantain data about data like how many sectors are allocated for one file and sectors 
+			numbers will be written in meta data.
+
+    benifit: faster repair/recovery in case file system corrupted.
+
+
+step 4:Create one directory and mount the partition to that directory . mkdir /data  mount /dev/sdb1 /data
+step 5: add new file system details in /etc/fstab file to make permanent mount.
+
+   there are 7 Fields in /etc/fstab
+
+
+/dev/sdb1     /data      xfs    defaults  0  1
+/dev/sdc1     /test      xfs    defaults,noauto  0  2
+/dev/sdc5     /oracle      xfs    defaults,noauto  0  2
+
+
+
+Devicename	Mountpoint	Filesystem-type	Permissions	Backup-partition	Filesystem-checkup-during-bootup
+1		2		3		4		5			6	
+
+
+backup 0 = No meta data backup
+       1 = Backup meta data
+for OS partitions we can recomend 1.
+
+/     = OS
+/boot = OS
+/test = other partition
+/oradata = Other partitions
+file system checkup
+  	0 No file system checkup during boot up.  no repair on file system during server coming up.
+	1 : serial file system checkup and first priority file systems.
+	2 : parlel or second priority
+
+
+* explain about fstab fields
+  6 fields
